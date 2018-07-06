@@ -1,3 +1,1 @@
-# README
- 
- N+ back-end practice
+N+ back-end practice
