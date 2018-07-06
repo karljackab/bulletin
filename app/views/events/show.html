@@ -1,0 +1,26 @@
+<body>
+	<H1 id="show_title"></H1>
+	<H3 id="show_status"></H3>
+	<p id="show_context"></p>
+	<p id="show_create_time"></p>
+	<p id="show_update_time"></p>
+	<a href="/events">Back to index page</a>
+</body>
+
+<script>
+	let url = new URL(location.href);
+	fetch(`/events/${url.searchParams.get('id')}.json`).then(function(response){
+		return response.json();
+	}).then(function(data){
+		const title=document.getElementById("show_title");
+		const pc = document.getElementById("show_context");
+		const pct = document.getElementById("show_create_time");
+		const put = document.getElementById("show_update_time");
+		const H3 = document.getElementById("show_status");
+		title.innerHTML=`${data['name']}`;
+		pc.innerHTML=`${data['context']}`;
+		pct.innerHTML=`created at ${data['created_at']}`;
+		put.innerHTML=`updated at ${data['updated_at']}`;
+		H3.innerHTML=`Type: ${data['event_status']}`;
+	});
+</script>

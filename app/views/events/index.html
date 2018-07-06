@@ -1,0 +1,49 @@
+<body>
+	<H1>Bulletin</H1>
+	<form method="post" action="/events/del_all">
+		<input type="submit" value="Delete All">
+	</form>
+	<div id="hello_user"></div>
+
+	<ul id="event_list">
+	</ul>
+	
+	<a href="/events/new">Create New Event</a><br>
+	<a href="/users/new">Create New Account</a>
+</body>
+
+<script>
+	fetch("/events.json").then(function(response){
+		return response.json();
+	}).then(function(data){
+		const ul = document.getElementById('event_list');
+		for(let i in data)
+		{
+			let li = document.createElement('li');
+			let a1 = document.createElement('a');
+			let a2 = document.createElement('a');
+			let form = document.createElement('form');
+			let div2 = document.createElement('div2');
+			let input1 = document.createElement('input');
+			let input2 = document.createElement('input');
+			li.innerHTML = `${data[i].name} `;
+			a1.href=`/events/${data[i].id}?id=${data[i].id}`;
+			a1.innerHTML = 'Show ';
+			li.appendChild(a1);
+			a2.href=`/events/${data[i].id}/edit?id=${data[i].id}`;
+			a2.innerHTML = 'Edit ';
+			li.appendChild(a2);
+			form.method='post';
+			form.action=`/events/${data[i].id}`;
+			input1.type='hidden';
+			input1.name='_method';
+			input1.value='delete';
+			input2.type='submit';
+			input2.value='Delete';
+			form.appendChild(input1);
+			form.appendChild(input2);
+			li.appendChild(form);
+			ul.appendChild(li);
+		}
+	});
+</script>

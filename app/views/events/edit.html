@@ -1,0 +1,16 @@
+<form id="edit_form" method="POST">
+	<p>Event title: <input type="text" name="name"></p>
+	<p>Context: <input type="text" name="context"></p>
+	<input type="radio" name="event_status" value="new" checked>最新消息
+	<input type="radio" name="event_status" value="update">版本更新
+	<input type="submit" value="Update">
+	<input type="hidden" name="_method" value="put">
+</form>
+<a href="/events">Back to index page</a>
+
+<script>
+	let url = new URL(location.href);
+	let form = document.getElementById("edit_form");
+	form.action=`/events/${url.searchParams.get('id')}`;
+	console.log(form);
+</script>
